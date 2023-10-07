@@ -1,0 +1,35 @@
+﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+<!--article section-->
+<section class="article-section">
+    <div class="container">
+            <div class="title">
+                <div class="text">
+                    <h4 class="red-title">@Model.Value("articleNewsName")</h4>
+                    <h2>@Model.Value("articleNewsTitle")</h2>
+                </div>
+                <a href="@Model.Value("articleNewsBtnUrl")" class="btn-transparent">@Model.Value("articleNewsBtnText")</a>
+            </div>
+            <div class="article">
+                <div class="box">
+                    <img src="images/home-page/articles-and-news/how_to_use_digitalization.png" alt="a girl sits in a classroom" />
+                    <p>Business</p>
+                    <h3>How To Use Digitalization In The Classroom</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto sed his libero</p>
+                </div>
+                <div class="box">
+                    <img src="images/home-page/articles-and-news/implement_chatgpt.png" alt="Use Chat GPT" />
+                    <p>Business</p>
+                    <h3>How To Implement Chat GPT
+                        In Your Projects</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto sed his libero</p>
+                </div>
+                <div class="box">
+                    <img src="images/home-page/articles-and-news/the_guide_to_support.png" alt="two book on the desk" />
+                    <p>Business</p>
+                    <h3>The Guide To Support 
+                        Modern CSS Design</h3>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto sed his libero</p>
+                </div>
+            </div>        
+    </div>
+</section>

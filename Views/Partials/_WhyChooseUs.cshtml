@@ -1,0 +1,50 @@
+﻿@using Umbraco.Cms.Core.Models
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+<!--why choose us section-->
+   <section class="choose-us-section">
+        <div class="container">
+            <div class="text">
+                <h4 class="red-title">@Model.Value("whyChooseUsSectionName")</h4>
+                <h2>@Model.Value("whyChooseUsSectionTitle")</h2>
+                <div class="section">
+                    <i class="fa-solid fa-handshake"></i>
+                    <div class="services">
+                        <h3>@Model.Value("serviceTitle1")</h3>
+                        <p>@Model.Value("servicePreamble1")</p>
+                    </div>
+                </div>
+                <div class="section">
+                    <i class="fa-solid fa-building-columns"></i>
+                    <div class="services">
+                        <h3>@Model.Value("serviceTitle2")</h3>
+                        <p>@Model.Value("servicePreamble2")</p>
+                  </div>
+                </div>
+                <div class="section">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <div class="services">
+                        <h3>@Model.Value("serviceTitle3")</h3>
+                        <p>@Model.Value("servicePreamble3")</p>
+                    </div>
+                </div>
+                
+                <div class="section">
+                    <i class="fa-solid fa-square-check"></i>    
+                    <div class="services">
+                        <h3>@Model.Value("serviceTitle4")</h3>
+                        <p>@Model.Value("servicePreamble4")</p>
+                    </div>
+                    
+                </div>
+            </div>
+           
+           @{
+                var sectionImage = Model.Value<MediaWithCrops>("whyChooseUsSectionImage");
+                if (sectionImage != null)
+                {
+                    <img src="@sectionImage.MediaUrl()" alt="@sectionImage.Value("whyChooseUsSectionImage")" />
+                }
+            }
+            
+        </div>
+   </section>

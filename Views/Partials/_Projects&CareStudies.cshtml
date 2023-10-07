@@ -1,0 +1,77 @@
+﻿@using Umbraco.Cms.Core.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+<!--project case studies section-->
+<section class="project-case-section">
+<div class="container">
+    <h4 class="red-title">@Model.Value("projectSectionName")</h3>
+    <h2>@Model.Value("projectSectionTitle")</h2>
+    <div class="cases">
+        <div class="section-up">
+            <div class="one-case-box">
+                <div class="box">
+                    @{
+                        var projectImage1 = Model.Value<MediaWithCrops>("projectImage1");
+                        if (projectImage1 != null)
+                        {
+                            <img src="@projectImage1.MediaUrl()" alt="@projectImage1.Value("projectImage1")" />
+                        }
+                    }
+                    <h3>@Model.Value("projectTitle1")</h3>
+                </div>
+                <div class="btn">
+                    <a href="@Model.Value("projectBtnUrl1")" class="btn-transparent no-border">@Model.Value("projectBtnText1")<i class="fa-regular fa-arrow-up-right"></i></a>
+                </div>
+            </div>
+            <div class="one-case-box">
+                <div class="box">
+                     @{
+                        var projectImage2 = Model.Value<MediaWithCrops>("projectImage2");
+                        if (projectImage2 != null)
+                        {
+                            <img src="@projectImage2.MediaUrl()" alt="@projectImage1.Value("projectImage2")" />
+                        }
+                     }
+                    <h3>@Model.Value("projectTitle2")</h3>
+                </div>
+                <div class="btn">
+                    <a href="@Model.Value("projectBtnUrl2")" class="btn-transparent no-border">@Model.Value("projectBtnText2")<i class="fa-regular fa-arrow-up-right"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="section-down">
+            <div class="one-case-box">
+                <div class="box">
+                    @{
+                        var projectImage3 = Model.Value<MediaWithCrops>("projectImage3");
+                        if (projectImage3 != null)
+                        {
+                            <img src="@projectImage3.MediaUrl()" alt="@projectImage1.Value("projectImage3")" />
+                        }
+                    }
+                    <h3>@Model.Value("projectTitle3")</h3>
+                </div>
+                <div class="btn">
+                    <a href="@Model.Value("projectBtnUrl3")" class="btn-transparent no-border">@Model.Value("projectBtnText3") <i class="fa-regular fa-arrow-up-right"></i></a>
+                </div>                
+            </div>
+            <div class="one-case-box">
+                <div class="box">
+                    @{
+                        var projectImage4 = Model.Value<MediaWithCrops>("projectImage4");
+                        if (projectImage4 != null)
+                        {
+                            <img src="@projectImage1.MediaUrl()" alt="@projectImage1.Value("projectImage4")" />
+                        }
+                    }
+                    <h3>@Model.Value("projectTitle4")</h3>
+                </div>
+                <div class="btn">
+                    <a href="@Model.Value("projectBtnUrl4")" class="btn-transparent no-border">@Model.Value("projectBtnText4")<i class="fa-regular fa-arrow-up-right"></i></a>
+                </div>       
+            </div>
+        </div>
+        
+    </div>
+    <div class="projects"><a href="@Model.Value("porjectSectionBtnUrl")" class="btn-black">@Model.Value("porjectSectionBtnText")<i class="fa-regular fa-arrow-up-right"></i></a></div>
+</div>
+</section>

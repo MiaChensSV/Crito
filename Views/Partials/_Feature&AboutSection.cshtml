@@ -1,0 +1,58 @@
+﻿@using Umbraco.Cms.Core.Models;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+
+<!--feature && about company section-->
+<section class="feature-about-section">
+    <div class="container">
+        <div class="feature">
+            <div class="title">
+                <h4 class="red-title">@Model.Value("featureSectionName")</h4>
+                <h2>@Model.Value("featureSectionTitle")</h2>
+                <a href="@Model.Value("featherSectionBtnUrl")" class="btn-yellow">@Model.Value("featureSectionButtonName") <i class="fa-regular fa-arrow-up-right"></i></a>
+            </div>
+            <div class="service">
+                <div class="section-up">
+                    <div class="section">
+                        <i class="fa-solid fa-handshake"></i>
+                        <h3>@Model.Value("serviceTitle1")</h3>
+                        <p>@Model.Value("serviceDescription1")</p>
+                    </div>
+                    <div class="section">
+                        <i class="fa-solid fa-building-columns"></i>
+                        <h3>@Model.Value("serviceTitle2")</h3>
+                        <p>@Model.Value("serviceDescription2")</p>
+                    </div>
+                </div>
+                <div class="section-down">
+                    <div class="section">
+                        <i class="fa-solid fa-lightbulb"></i>
+                        <h3>@Model.Value("serviceTitle3")</h3>
+                        <p>@Model.Value("serviceDescription3")</p>
+                    </div>
+                    
+                    <div class="section">
+                        <i class="fa-solid fa-square-check"></i>    
+                        <h3>@Model.Value("serviceTitle4")</h3>
+                        <p>@Model.Value("serviceDescription4")</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="about-section">
+             @{
+                var aboutCompanyImage = Model.Value<MediaWithCrops>("aboutCompanySectionImage");
+                if (aboutCompanyImage != null)
+                {
+                    <img src="@aboutCompanyImage.MediaUrl()" alt="@aboutCompanyImage.Value("aboutCompanyImage")" />
+                }
+            }
+            <div class="title">
+                <h4 class="red-title">@Model.Value("aboutCompanySectionName")</h4>
+                <h2>@Model.Value("aboutCompanySectionTitle")</h2>
+                <p>@Model.Value("aboutCompanySectionDescription")</p>
+                <a href="@Model.Value("aboutCompanySectionLeftBtnLink")" class="btn-black">@Model.Value("aboutCompanySectionLeftBtn") <i class="fa-regular fa-arrow-up-right"></i></a>
+                <a href="@Model.Value("aboutCompanySectionRighttBtnLink")" class="btn-transparent no-border"><i class="fa-regular fa-circle-play"></i> @Model.Value("aboutCompanySectionRightBtn")</a>
+            </div>
+        </div>
+    </div>
+</section>

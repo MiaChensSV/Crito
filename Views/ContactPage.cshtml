@@ -1,0 +1,59 @@
+﻿@using Crito.Models;
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ContactPage>
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@{
+    Layout = "_LayoutWithBreadcrumb.cshtml";
+    var contactForm = new ContactFormModel();
+}
+
+<section class="contact">
+  <div class="container">
+    <div class="contact-info">
+      <div class="box">
+        <i class="fa-solid fa-location-dot"></i>
+        <div class="info">
+          <h3>Visit us</h3>
+          <p>@Model.Value("contactInfoStreetName")</p>
+          <p>@Model.Value("contactInfoPostalCode") @Model.Value("contactInfoCity")</p>
+        </div>
+      </div>
+      <div class="box">
+        <i class="fa-solid fa-phone"></i>
+        <div class="info">
+          <h3>Call us</h3>
+          <p>@Model.Value("contactInfoPhoneNumber1")</p>
+          <p>@Model.Value("contactInfoPhoneNumber2")</p>
+        </div>
+      </div>
+      <div class="box">
+        <i class="fa-solid fa-envelope"></i>
+        <div class="info">
+          <h3>Email us</h3>
+          <p>@Model.Value("contactInfoEmail1")</p>
+          <p>@Model.Value("contactInfoEmail2")</p>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form">
+      <h2>Leave us a message for any information.</h2>
+        @using (Html.BeginUmbracoForm("Index", "Contact", FormMethod.Post))
+        {
+            <div asp-validation-summary="ModelOnly"></div>
+            <input asp-for="@contactForm.Name" type="text" placeholder="Name*" aria-label="Name" />
+            <input asp-for="@contactForm.Email" type="email" placeholder="Email*" aria-label="Email" />
+            <textarea asp-for="@contactForm.Message" placeholder="Your Message*" aria-label="Message"></textarea>
+            <button class="btn-yellow" type="submit">
+                Send Message <i class="fa-regular fa-arrow-up-right"></i>
+            </button>
+        }
+           
+    </div>
+  </div>
+</section>
+
+<section class="map">
+  <iframe
+    src="@Model.Value("gooleMapsURL")"
+    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</section>

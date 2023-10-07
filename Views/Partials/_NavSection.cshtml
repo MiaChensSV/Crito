@@ -1,15 +1,27 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core
+@using Umbraco.Cms.Core.Models.PublishedContent
+@using Umbraco.Cms.Core.Routing
+@using Umbraco.Extensions
+
+@inject IPublishedValueFallback PublishedValueFallback
+@inject IPublishedUrlProvider PublishedUrlProvider
+
+@{ 
+    var site = Model.Root();
+    var selection = Model.Root().Children.Where(x => x.IsVisible(PublishedValueFallback)).ToArray(); 
+}
 
 <nav class="nav-section">
     <div class="container">
-        <a href="home.html"><img class="image-logo" src="images/logos/logotype.svg" alt="crito_logo" /></a>
+        <a href="/"><img class="image-logo" src="~/images/logos/logotype.svg" alt="crito_logo" /></a>
         <button class="menu-bars"><i class="fa-regular fa-bars"></i></button>
         <div class="menu">
             <div class="top-menu">
                 <div class="company-info">
-                    <div class="content-box"><i class="fa-regular fa-phone-volume"></i>+46(8)1214700</div>
-                    <div class="content-box"><i class="fa-regular fa-envelope"></i>info@crito.com</div>
-                    <div class="content-box last"><i class="fa-regular fa-location-dot"></i>Sveavagen 31, 111 34 STOCKHOLM</div>
+                    <div class="content-box"><i class="fa-regular fa-phone-volume"></i>@Model.Value("headerCompanyNr")</div>
+                    <div class="content-box"><i class="fa-regular fa-envelope"></i>@Model.Value("headerCompanyEmail")</div>
+                    <div class="content-box last"><i class="fa-regular fa-location-dot"></i>@Model.Value("headerCompanyAddress")</div>
                 </div>
                 <div class="social-media">
                     <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook"></i></a>
@@ -20,13 +32,18 @@
             </div>
             <div class="main-menu">
                 <nav>
-                    <a class="active" href="home.html">Home</a>
-                    <a href="service.html">Service</a>
-                    <a href="news.html">News</a>
-                    <a href="contact.html">Contact</a>
+                    <a class="@(Model.Id ==  site.Id ? "active" :null)" href="/">@site.Name</a>
+                    
+                    @if (selection?.Length > 0)
+                    {
+                        @foreach (var item in selection)
+                        {
+                            <a class="@item.IsAncestorOrSelf(Model) ? "active" :null)" href="@item.Url(PublishedUrlProvider)">@item.Name</a>
+                        }
+                    }
                 </nav>
                 
-                <a href="login.html" class="btn-yellow">Login <i class="fa-regular fa-arrow-up-right"></i></a>
+                <a href="/login" class="btn-yellow">Login <i class="fa-regular fa-arrow-up-right"></i></a>
                
             </div>
         </div>
