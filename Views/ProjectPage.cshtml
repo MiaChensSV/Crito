@@ -1,5 +1,5 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
-@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ArticleListPage>
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ProjectPage>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
 @using Umbraco.Cms.Core.Models.PublishedContent;
 @{
@@ -9,10 +9,10 @@
     if (!int.TryParse(Context.Request.Query["page"], out pageNumber))
         pageNumber = 1;
 
-    var selection = Umbraco.Content(Guid.Parse("404411e3-8886-4bd8-9b8d-eff58bfe84a0"))?
-                .ChildrenOfType("articleDetailPage")?
-                .Where(x => x.IsVisible())
-                .OrderByDescending(x => x.CreateDate).ToList();
+   	var selection = Umbraco.Content(Guid.Parse("3b5b8b21-5d95-438c-87cb-481b5390b2c3"))
+    .ChildrenOfType("projectDetailPage")
+    .Where(x => x.IsVisible())
+    .OrderByDescending(x => x.CreateDate).ToList();
 
     var totalItems = selection?.Count() ?? 0;
     var pagedItems = selection?.Skip((pageNumber - 1) * itemsPerPage).Take(itemsPerPage);
@@ -28,19 +28,12 @@
                 @foreach (var item in pagedItems)
                 {
                     var url = item.Url();
-                    var date = item.CreateDate;
-                    var image = item.Value<IPublishedContent>("newsImage");
-                    var category = item.Value("newsCategory");
+                    var image = item.Value<IPublishedContent>("projectImage");
                     var title = item.Name();
-                    var preamble = item.Value("newsPreamble");
+                    var preamble = item.Value("projectPreamble");
 
                     <a class="box" href="@url">
-                        <div class="calender">
-                            <div class="date">@date.ToString("dd")</div>
-                            <div class="month">@date.ToString("MMM")</div>
-                        </div>
                         <img class="image" src="@image?.Url()" alt="@image?.Name()" />
-                        <p>@category</p>
                         <h3>@title</h3>
                         <p>@preamble</p>
                     </a>

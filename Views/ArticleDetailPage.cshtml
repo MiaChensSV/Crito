@@ -9,6 +9,10 @@
     Layout = "_LayoutWithBreadcrumb.cshtml";
     var userService = UserService;
     var image = Model.Value<IPublishedContent>("newsImage");
+	var selection = Umbraco.Content(Guid.Parse("404411e3-8886-4bd8-9b8d-eff58bfe84a0"))
+        .ChildrenOfType("articleDetailPage")
+        .Where(x => x.IsVisible())
+        .OrderByDescending(x => x.UpdateDate).ToList().Take(3);
 }
 
 <section class="specific-article">
@@ -37,18 +41,18 @@
       <input value="Type to Search" aria-label="Search" />
       <div class="recent-posts">
         <h3>Recent Posts</h3>
-        <div class="one-post">
-          <h4>How To Blow Through Capital At An Incredible Rate</h4>
-          <p>Jan 14, 2020</p>
-        </div>
-        <div class="one-post">
-          <h4>How To Blow Through Capital At An Incredible Rate</h4>
-          <p>Jan 14, 2020</p>
-        </div>
-        <div class="one-post">
-          <h4>How To Blow Through Capital At An Incredible Rate</h4>
-          <p>Jan 14, 2020</p>
-        </div>
+        
+    	@foreach (var item in selection)
+    	{
+    	    var url = item.Url();
+    	    var date = item.CreateDate;
+    	    var title = item.Name();
+
+    	    <div class="one-post" href="@url">
+              <h4>@title</h4>
+              <p>@date.ToString("MMM dd, yyyy")</p>
+            </div>
+    	}
       </div>
       <div class="categories">
         <h3>Categories</h3>
@@ -80,53 +84,5 @@
     </div>
   </div>
 </section>
-<!--article section-->
-<section class="article-section background-light-yellow">
-  <div class="container">
-    <div class="title">
-      <div class="text">
-        <h4 class="red-title">Article & News</h4>
-        <h2>Get Every Single Articles & News</h2>
-      </div>
-      <a href="articles.html" class="btn-transparent">Browse Articles</a>
-    </div>
-    <div class="article">
-      <div class="box">
-        <img
-          src="images/home-page/articles-and-news/how_to_use_digitalization.png"
-          alt="a girl sits in a classroom"
-        />
-        <p>Business</p>
-        <h3>How To Use Digitalization In The Classroom</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Architecto sed his libero
-        </p>
-      </div>
-      <div class="box">
-        <img
-          src="images/home-page/articles-and-news/implement_chatgpt.png"
-          alt="Use Chat GPT"
-        />
-        <p>Business</p>
-        <h3>How To Implement Chat GPT In Your Projects</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Architecto sed his libero
-        </p>
-      </div>
-      <div class="box">
-        <img
-          src="images/home-page/articles-and-news/the_guide_to_support.png"
-          alt="two book on the desk"
-        />
-        <p>Business</p>
-        <h3>The Guide To Support Modern CSS Design</h3>
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Architecto sed his libero
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
+
+@await Html.PartialAsync("_Article&News")

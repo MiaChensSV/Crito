@@ -1,5 +1,16 @@
 ﻿@using Umbraco.Cms.Core.Models;
+@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models.PublishedContent;
+@{
+	var selection = Umbraco.Content(Guid.Parse("f419d986-1d6b-4258-b915-c535fd09b6cf"))
+    .ChildrenOfType("serviceDetailPage")
+    .Where(x => x.IsVisible())
+    .OrderBy(x => x.Name).ToList();
+    var upSection= selection.Take(2);
+    var downSection= selection.GetRange(2,2);
+}
 
 <!--feature && about company section-->
 <section class="feature-about-section">
@@ -13,27 +24,28 @@
             <div class="service">
                 <div class="section-up">
                     <div class="section">
+                    @foreach (var item in upSection)
+                	{
+                	    var title = item.Name();
+                        var description = item.Value("serviceDescription");
+
                         <i class="fa-solid fa-handshake"></i>
-                        <h3>@Model.Value("serviceTitle1")</h3>
-                        <p>@Model.Value("serviceDescription1")</p>
-                    </div>
-                    <div class="section">
-                        <i class="fa-solid fa-building-columns"></i>
-                        <h3>@Model.Value("serviceTitle2")</h3>
-                        <p>@Model.Value("serviceDescription2")</p>
+                        <h3>@title</h3>
+                        <p>@description</p>
+                    }
                     </div>
                 </div>
                 <div class="section-down">
                     <div class="section">
-                        <i class="fa-solid fa-lightbulb"></i>
-                        <h3>@Model.Value("serviceTitle3")</h3>
-                        <p>@Model.Value("serviceDescription3")</p>
-                    </div>
-                    
-                    <div class="section">
-                        <i class="fa-solid fa-square-check"></i>    
-                        <h3>@Model.Value("serviceTitle4")</h3>
-                        <p>@Model.Value("serviceDescription4")</p>
+                        @foreach (var item in downSection)
+                    	{
+                    	    var title = item.Name();
+                            var description = item.Value("serviceDescription");
+    
+                            <i class="fa-solid fa-handshake"></i>
+                            <h3>@title</h3>
+                            <p>@description</p>
+                        }
                     </div>
                 </div>
             </div>

@@ -1,6 +1,23 @@
 ﻿@using Umbraco.Cms.Web.Common.PublishedModels;
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.ServicePage>
 @using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models.PublishedContent;
 @{
 	Layout = "_LayoutWithBreadcrumb.cshtml";
+	var selection = Umbraco.Content(Guid.Parse("f419d986-1d6b-4258-b915-c535fd09b6cf"))
+    .ChildrenOfType("serviceDetailPage")
+    .Where(x => x.IsVisible())
+    .OrderBy(x => x.Name).ToList();
 }
+
+ <section class="news-articles">
+    <div class="container">
+    	@foreach (var item in selection)
+    	{
+			<a class="box" href="@item.Url()">
+			<h2>@item.Name()</h2>
+			<p>@item.Value("serviceDescription")</p>
+			</a>
+    	}
+    </div>
+</section>

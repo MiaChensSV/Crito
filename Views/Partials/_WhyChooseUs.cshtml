@@ -1,43 +1,35 @@
 ﻿@using Umbraco.Cms.Core.Models
 @inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models.PublishedContent;
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+
+@{
+	var selection = Umbraco.Content(Guid.Parse("f419d986-1d6b-4258-b915-c535fd09b6cf"))
+    .ChildrenOfType("serviceDetailPage")
+    .Where(x => x.IsVisible())
+    .OrderBy(x => x.Name);
+}
+
 <!--why choose us section-->
    <section class="choose-us-section">
         <div class="container">
             <div class="text">
                 <h4 class="red-title">@Model.Value("whyChooseUsSectionName")</h4>
                 <h2>@Model.Value("whyChooseUsSectionTitle")</h2>
-                <div class="section">
+            	@foreach (var item in selection)
+            	{
+            	var title = item.Name();
+            	var description = item.Value("serviceDescription");
+            	<div class="section">
                     <i class="fa-solid fa-handshake"></i>
                     <div class="services">
-                        <h3>@Model.Value("serviceTitle1")</h3>
-                        <p>@Model.Value("servicePreamble1")</p>
+                        <h3>@title</h3>
+                        <p>@description</p>
                     </div>
                 </div>
-                <div class="section">
-                    <i class="fa-solid fa-building-columns"></i>
-                    <div class="services">
-                        <h3>@Model.Value("serviceTitle2")</h3>
-                        <p>@Model.Value("servicePreamble2")</p>
-                  </div>
-                </div>
-                <div class="section">
-                    <i class="fa-solid fa-lightbulb"></i>
-                    <div class="services">
-                        <h3>@Model.Value("serviceTitle3")</h3>
-                        <p>@Model.Value("servicePreamble3")</p>
-                    </div>
-                </div>
-                
-                <div class="section">
-                    <i class="fa-solid fa-square-check"></i>    
-                    <div class="services">
-                        <h3>@Model.Value("serviceTitle4")</h3>
-                        <p>@Model.Value("servicePreamble4")</p>
-                    </div>
-                    
-                </div>
+            	}
             </div>
-           
            @{
                 var sectionImage = Model.Value<MediaWithCrops>("whyChooseUsSectionImage");
                 if (sectionImage != null)

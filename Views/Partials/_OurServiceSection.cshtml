@@ -1,31 +1,30 @@
-﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
-
+﻿@using Umbraco.Cms.Web.Common.PublishedModels;
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@using Umbraco.Cms.Core.Models.PublishedContent;
+@{
+	var selection = Umbraco.Content(Guid.Parse("f419d986-1d6b-4258-b915-c535fd09b6cf"))
+    .ChildrenOfType("serviceDetailPage")
+    .Where(x => x.IsVisible())
+    .OrderBy(x => x.Name).ToList().Take(4);
+}
 <!--our service section-->
 <section class="our-service-section">
     <div class="container">
-        <h4 class="red-title">@Model.Value("serviceTitle1")</h4>
-        <h2>We Provide The Best Service For Consulting</h2>
+        <h4 class="red-title">@Model.Value("ourServiceSectionName")</h4>
+        <h2>@Model.Value("ourServiceSectionTitle")</h2>
         <div class="section">
+    	@foreach (var item in selection)
+    	{
+    	    var title = item.Name();
+    	    var url = item.Url();
+            var description = item.Value("serviceDescription");
             <div class="box">
-                <h3>@Model.Value("serviceTitle1")</h3>
-                <p class="md-disable">@Model.Value("serviceDescription1") </p>
-                <a href="@Model.Value("service1Url")" class="btn-circle"><i class="fa-solid fa-arrow-right"></i></a>
-            </div>        
-            <div class="box">
-                <h3>@Model.Value("serviceTitle2")</h3>
-                <p class="md-disable">@Model.Value("serviceDescription2") </p>
-                <a href="@Model.Value("service2Url")" class="btn-circle"><i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-            <div class="box">
-                <h3>@Model.Value("serviceTitle3")</h3>
-                <p class="md-disable">@Model.Value("serviceDescription3") </p>
-                <a href="@Model.Value("service3Url")" class="btn-circle"><i class="fa-solid fa-arrow-right"></i></a>
-            </div>
-            <div class="box">
-                <h3>@Model.Value("serviceTitle4")t</h3>
-                <p class="md-disable">@Model.Value("serviceDescription4") </p>
-                <a href="@Model.Value("service4Url")" class="btn-circle"><i class="fa-solid fa-arrow-right"></i></a>
-            </div>
+            <h3>@title</h3>
+            <p class="md-disable">@description</p>
+            <a href="@url" class="btn-circle"><i class="fa-solid fa-arrow-right"></i></a>
+            </div>  
+    	}     
         </div>
         <a href="@Model.Value("ourServiceSectionBtnUrl")" class="btn-transparent">@Model.Value("ourServiceSectionButtonText")<i class="fa-regular fa-arrow-up-right"></i></a>
     </div>

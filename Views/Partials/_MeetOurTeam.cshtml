@@ -1,41 +1,58 @@
 ﻿@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage
+@using Umbraco.Cms.Core.Models
 <!--meet our team section-->
 <section class="meet-team-client-says-section">
     <div class="container">
         <div class="meet-team">
             <div class="title">
                 <div class="text">
-                    <h4 class="red-title">Meet Our Team</h4>
-                    <h2>Experience Team Members</h2>
+                    <h4 class="red-title">@Model.Value("meetTeamName")</h4>
+                    <h2>@Model.Value("meetTeamTitle")</h2>
                 </div>
-                <a href="our-team.html" class="btn-yellow">Browse Team</a>
+                <a href="@Model.Value("meetTeamBtnUrl")" class="btn-yellow">@Model.Value("meetTeamBtnText")</a>
             </div>
             <div class="people">
                 <div class="box">
-                    <img src="images/home-page/teammembers/kristine_palmer.png" alt="Kristine Palmer" />
-                    <h3>Kristine Palmer</h3>
-                    <p>Chef Operation Officer</p>
+                    @{
+                    var teamMemberImage1 = Model.Value<MediaWithCrops>("teamMemberImage1");
+                    <img src="@teamMemberImage1.MediaUrl()" alt="@Model.Value("teamMemberName1")" />
+                    }
+                    
+                    <h3>@Model.Value("teamMemberName1")</h3>
+                    <p>@Model.Value("teamMemberPosition1")</p>
                 </div>
                 <div class="box">
-                    <img src="images/home-page/teammembers/mark_aubri.png" alt="Mark Aubri" />
-                    <h3>Mark Aubrir</h3>
-                    <p>Chef Operation Officer</p>
+                    @{
+                    var teamMemberImage2 = Model.Value<MediaWithCrops>("teamMemberImage2");
+                    <img src="@teamMemberImage2.MediaUrl()" alt="@Model.Value("teamMemberName2")" />
+                    }
+                    
+                    <h3>@Model.Value("teamMemberName2")</h3>
+                    <p>@Model.Value("teamMemberPosition2")</p>
                 </div>
                 <div class="box">
-                    <img src="images/home-page/teammembers/kimberly_hansen.png" alt="Kimberly Hansen" />
-                    <h3>Kimberly Hansen</h3>
-                    <p>Chef Operation Officer</p>
+                    @{
+                    var teamMemberImage3 = Model.Value<MediaWithCrops>("teamMemberImage3");
+                    <img src="@teamMemberImage3.MediaUrl()" alt="@Model.Value("teamMemberName3")" />
+                    }
+                    
+                    <h3>@Model.Value("teamMemberName3")</h3>
+                    <p>@Model.Value("teamMemberPosition3")</p>
                 </div>
                 <div class="box">
-                    <img src="images/home-page/teammembers/justin_willoman.png" alt="Justin Willoman" />
-                    <h3>Justin Willoman</h3>
-                    <p>Chef Operation Officer</p>
+                     @{
+                    var teamMemberImage4 = Model.Value<MediaWithCrops>("teamMemberImage4");
+                    <img src="@teamMemberImage4.MediaUrl()" alt="@Model.Value("teamMemberName4")" />
+                    }
+                    
+                    <h3>@Model.Value("teamMemberName4")</h3>
+                    <p>@Model.Value("teamMemberPosition4")</p>
                 </div>
             </div>
         </div>
         <div class="client-say">
-            <h4 class="red-title">Testimorial</h4>
-            <h2>What Our Cilent Says</h2>
+            <h4 class="red-title">@Model.Value("testimorialName")</h4>
+            <h2>@Model.Value("testimorialTitle")</h2>
             <div class="rates">
                 <div class="one-rate-box">
                     <i class="fa-solid fa-star"></i>
@@ -43,28 +60,16 @@
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis ipsum quas quos tenetur, obcaecati excepturi pariatur repudiandae. Maiores, enim esse, eligendi ipsa, in praesentium quaerat adipisci sit nihil quisquam aliquam?</p>
-                    <div class="people">
-                        <img src="images/home-page/cassandra.png" alt="Cassandra Warren" />
+                    <p>@Model.Value("testimorialDescription1")</p>
+                     <div class="people">
+                        @{
+                        var testimorialImage1 = Model.Value<MediaWithCrops>("testimorialImage1");
+                        <img src="@testimorialImage1.MediaUrl()" alt="@Model.Value("testimorialImage1")" />
+                        }
+                       
                         <div class="info">
-                            <h3>Cassandra Warren</h3>
-                            <p>Business Manager,Dorfus</p>
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="one-rate-box">
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis ipsum quas quos tenetur, obcaecati excepturi pariatur repudiandae. Maiores, enim esse, eligendi ipsa, in praesentium quaerat adipisci sit nihil quisquam aliquam?</p>
-                    <div class="people">
-                        <img src="images/home-page/amanda.png" alt="Cassandra Warren" />
-                        <div class="info">
-                            <h3>Cassandra Warren</h3>
-                            <p>Business Manager,Dorfus</p>
+                            <h3>@Model.Value("testimorialName1")</h3>
+                            <p>@Model.Value("testimorialPosition1")</p>
                         </div>
                     </div>
                 </div>
@@ -74,12 +79,35 @@
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Debitis ipsum quas quos tenetur, obcaecati excepturi pariatur repudiandae. Maiores, enim esse, eligendi ipsa, in praesentium quaerat adipisci sit nihil quisquam aliquam?</p>
+                    <p>@Model.Value("testimorialDescription2")</p>
                     <div class="people">
-                        <img src="images/home-page/jack.png" alt="Cassandra Warren" />
+                        @{
+                        var testimorialImage2 = Model.Value<MediaWithCrops>("testimorialImage2");
+                        <img src="@testimorialImage2.MediaUrl()" alt="@Model.Value("testimorialImage2")" />
+                        }
+                       
                         <div class="info">
-                            <h3>Cassandra Warren</h3>
-                            <p>Business Manager,Dorfus</p>
+                            <h3>@Model.Value("testimorialName2")</h3>
+                            <p>@Model.Value("testimorialPosition2")</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="one-rate-box">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <p>@Model.Value("testimorialDescription3")</p>
+                     <div class="people">
+                        @{
+                        var testimorialImage3 = Model.Value<MediaWithCrops>("testimorialImage3");
+                        <img src="@testimorialImage3.MediaUrl()" alt="@Model.Value("testimorialImage3")" />
+                        }
+                       
+                        <div class="info">
+                            <h3>@Model.Value("testimorialName3")</h3>
+                            <p>@Model.Value("testimorialPosition3")</p>
                         </div>
                     </div>
                 </div>

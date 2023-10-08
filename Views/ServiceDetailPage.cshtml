@@ -4,3 +4,16 @@
 @{
 	Layout = "_LayoutWithBreadcrumb.cshtml";
 }
+
+  <section class="specific-article">
+      <div class="container">
+        <div class="article">
+          <h2@Model.Value("serviceTitle")</h2>
+         
+         
+          <p>
+           @Model.Value("serviceDescription")
+          </p>
+        </div>
+      </div>
+    </section>
